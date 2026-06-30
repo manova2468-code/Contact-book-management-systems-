@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Contacts - Smart Contact Book</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<h1>📱 Smart Contact Book</h1>
+
+<div class="nav">
+    <a href="/">📋 All Contacts</a>
+    <a href="/add/">➕ Add Contact</a>
+    <a href="/emergency/">🚨 Emergency</a>
+    <a href="/frequent/">📊 Frequent</a>
+</div>
+
+<h2>⭐ Favorite Contacts</h2>
+
+{% if contacts %}
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+    {% for c in contacts %}
+        <div class="card">
+            <h3>{{ c.name }}</h3>
+            <p>📞 {{ c.phone }}</p>
+            {% if c.email %}
+            <p>📧 {{ c.email }}</p>
+            {% endif %}
+            <p>👥 {{ c.relationship }}</p>
+            <p>⭐ Priority: <strong>{{ c.priority }}</strong></p>
+            {% if c.notes %}
+            <p>📝 {{ c.notes }}</p>
+            {% endif %}
+            <div style="margin-top: 15px;">
+                <a href="/edit/{{ c.id }}/" style="color: #38bdf8; text-decoration: none; margin-right: 10px;">✏️ Edit</a>
+                <a href="/delete/{{ c.id }}/" style="color: #ef4444; text-decoration: none;" onclick="return confirm('Are you sure you want to delete this contact?')">🗑️ Delete</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% else %}
+    <p style="font-size: 1.2em; margin-top: 40px; color: #cbd5e1;">No favorite contacts yet. <a href="/add/" style="color: #38bdf8;">Add your first favorite!</a></p>
+{% endif %}
+
+</body>
+</html>

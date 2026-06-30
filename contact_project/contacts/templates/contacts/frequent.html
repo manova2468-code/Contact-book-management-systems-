@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequent Contacts - Smart Contact Book</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<h1>📱 Smart Contact Book</h1>
+
+<div class="nav">
+    <a href="/">📋 All Contacts</a>
+    <a href="/add/">➕ Add Contact</a>
+    <a href="/favorites/">⭐ Favorites</a>
+    <a href="/emergency/">🚨 Emergency</a>
+</div>
+
+<h2>📊 Frequently Called</h2>
+
+{% if contacts %}
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+    {% for c in contacts %}
+        <div class="card">
+            <h3>{{ c.name }}</h3>
+            <p>📞 {{ c.phone }}</p>
+            <p>👥 {{ c.relationship }}</p>
+            <p>📈 Views: <strong>{{ c.views }}</strong></p>
+        </div>
+    {% endfor %}
+    </div>
+{% else %}
+    <p style="font-size: 1.2em; margin-top: 40px; color: #cbd5e1;">No contacts yet. <a href="/add/" style="color: #38bdf8;">Add your first contact!</a></p>
+{% endif %}
+
+</body>
+</html>

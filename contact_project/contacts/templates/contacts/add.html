@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Contact - Smart Contact Book</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<div class="form-container">
+  <div class="form-box">
+    <h2>➕ Add Contact</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" placeholder="Full Name" name="name" required>
+      <input type="tel" placeholder="Phone Number" name="phone" required>
+      <input type="email" placeholder="Email Address (optional)" name="email">
+
+      <select name="relationship" required>
+        <option value="">Select Relationship</option>
+        <option value="Friend">👥 Friend</option>
+        <option value="Family">👨‍👩‍👧‍👦 Family</option>
+        <option value="Work">💼 Work</option>
+        <option value="Other">📌 Other</option>
+      </select>
+
+      <select name="priority" required>
+        <option value="">Select Priority</option>
+        <option value="High">🔴 High</option>
+        <option value="Medium">🟡 Medium</option>
+        <option value="Low">🟢 Low</option>
+      </select>
+
+      <textarea name="notes" placeholder="Additional Notes (optional)..."></textarea>
+
+      <label>
+        <input type="checkbox" name="emergency"> 🚨 Emergency Contact
+      </label>
+
+      <label>
+        <input type="checkbox" name="favorite"> ⭐ Favorite Contact
+      </label>
+
+      <button type="submit">💾 Save Contact</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

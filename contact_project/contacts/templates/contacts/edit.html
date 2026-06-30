@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Contact - Smart Contact Book</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<div class="form-container">
+  <div class="form-box">
+    <h2>✏️ Edit Contact</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" placeholder="Full Name" name="name" value="{{ contact.name }}" required>
+      <input type="tel" placeholder="Phone Number" name="phone" value="{{ contact.phone }}" required>
+      <input type="email" placeholder="Email Address" name="email" value="{{ contact.email|default:'' }}">
+
+      <select name="relationship" required>
+        <option value="">Select Relationship</option>
+        <option value="Friend" {% if contact.relationship == "Friend" %}selected{% endif %}>👥 Friend</option>
+        <option value="Family" {% if contact.relationship == "Family" %}selected{% endif %}>👨‍👩‍👧‍👦 Family</option>
+        <option value="Work" {% if contact.relationship == "Work" %}selected{% endif %}>💼 Work</option>
+        <option value="Other" {% if contact.relationship == "Other" %}selected{% endif %}>📌 Other</option>
+      </select>
+
+      <select name="priority" required>
+        <option value="">Select Priority</option>
+        <option value="High" {% if contact.priority == "High" %}selected{% endif %}>🔴 High</option>
+        <option value="Medium" {% if contact.priority == "Medium" %}selected{% endif %}>🟡 Medium</option>
+        <option value="Low" {% if contact.priority == "Low" %}selected{% endif %}>🟢 Low</option>
+      </select>
+
+      <textarea name="notes" placeholder="Additional Notes...">{{ contact.notes|default:'' }}</textarea>
+
+      <label>
+        <input type="checkbox" name="emergency" {% if contact.emergency %}checked{% endif %}> 🚨 Emergency Contact
+      </label>
+
+      <label>
+        <input type="checkbox" name="favorite" {% if contact.favorite %}checked{% endif %}> ⭐ Favorite Contact
+      </label>
+
+      <button type="submit">💾 Update Contact</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="/" style="color: #38bdf8; text-decoration: none;">← Back to Contacts</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

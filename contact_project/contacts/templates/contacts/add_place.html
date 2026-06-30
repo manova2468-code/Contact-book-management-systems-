@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Place</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+
+<div class="form-container">
+    <div class="form-box">
+        <h2>🌍 Add New Place</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="text" name="name" placeholder="Place Name" required>
+
+            <textarea name="description" placeholder="Description" required></textarea>
+
+            <input type="text" name="location" placeholder="Location" required>
+
+            <select name="category">
+                <option value="temple">🛕 Temple</option>
+                <option value="hidden">🌄 Hidden Spot</option>
+                <option value="food">🍜 Food Street</option>
+            </select>
+
+            <button type="submit">➕ Add Place</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
